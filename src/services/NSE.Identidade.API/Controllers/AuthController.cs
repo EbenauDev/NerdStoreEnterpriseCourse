@@ -20,7 +20,7 @@ namespace NSE.Identidade.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost("novac-conta")]
+        [HttpPost("nova-conta")]
         public async Task<ActionResult> Registrar(UsuarioRegistro usuarioRegistro)
         {
             if (!ModelState.IsValid) return BadRequest();
