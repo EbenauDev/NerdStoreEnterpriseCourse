@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\building blocks\NSE.Core\NSE.Core.csproj" />
   </ItemGroup>
 	
@@ -19,6 +15,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.3" />
 	</ItemGroup>
 
 

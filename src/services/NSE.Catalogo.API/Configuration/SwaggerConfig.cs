@@ -2,8 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace NSE.Identidade.API.Configuration
+namespace NSE.Catalogo.API.Configuration
 {
     public static class SwaggerConfig
     {
@@ -13,7 +16,7 @@ namespace NSE.Identidade.API.Configuration
             {
                 c.SwaggerDoc(name: "v1", new OpenApiInfo
                 {
-                    Title = "NerdStore Enterpriese Identity API",
+                    Title = "NerdStore Enterpriese Catalogo API",
                     Description = "Esta API faz parte do curso ASP.NET Core Enterprise Application",
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
