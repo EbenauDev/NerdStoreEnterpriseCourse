@@ -30,6 +30,7 @@ namespace NSE.Identidade.API
         {
 
             services.AddIdentityConfiguration(Configuration);
+
             services.AddApiConfiguration();
             services.AddSwaggerConfiguration();
         }
