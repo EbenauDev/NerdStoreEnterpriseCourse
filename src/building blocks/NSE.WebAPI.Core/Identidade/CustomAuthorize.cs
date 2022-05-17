@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 
 namespace NSE.WebAPI.Core.Identidade
 {
@@ -17,7 +14,6 @@ namespace NSE.WebAPI.Core.Identidade
                 context.User.Claims.Any(c => c.Type == claimName && c.Value.Contains(claimValue));
         }
     }
-
 
     public class ClaimsAuthorizeAttribute : TypeFilterAttribute
     {
