@@ -1,7 +1,4 @@
 ﻿using NSE.Core.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NSE.Core.DomainObjects
 {

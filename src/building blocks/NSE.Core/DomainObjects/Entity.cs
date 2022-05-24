@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NSE.Core.DomainObjects
 {
     public abstract class Entity
     {
         public Guid Id { get; set; }
-
 
         public override bool Equals(object obj)
         {
