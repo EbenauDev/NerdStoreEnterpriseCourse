@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using NSE.Clientes.API.Configuration;
 using NSE.WebAPI.Core.Identidade;
 
-namespace NSE.Cliente.API
+namespace NSE.Clientes.API
 {
     public class Startup
     {

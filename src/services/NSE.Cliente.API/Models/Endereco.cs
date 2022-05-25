@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NSE.Cliente.API.Models
+namespace NSE.Clientes.API.Models
 {
     public class Endereco
     {

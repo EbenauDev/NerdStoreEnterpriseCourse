@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NSE.Cliente.API.Data;
+using NSE.Clientes.API.Data;
 
 namespace NSE.Clientes.API.Configuration
 {
