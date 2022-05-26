@@ -5,7 +5,7 @@ namespace NSE.Core.DomainObjects
     public class Cpf
     {
         public const int CpfMaxLength = 11;
-        public string Nmero { get; private set; }
+        public string Numero { get; private set; }
 
         //Construtor do EntityFramework
         protected Cpf() { }
@@ -14,6 +14,7 @@ namespace NSE.Core.DomainObjects
         {
             if (Validar(numero) == false)
                 throw new DomainException("CPF está inválido");
+            Numero = numero;
         }
 
         public static bool Validar(string cpf)

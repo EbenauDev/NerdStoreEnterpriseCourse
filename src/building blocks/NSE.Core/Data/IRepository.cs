@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NSE.Core.DomainObjects;
+using System;
 
 namespace NSE.Core.Data
 {
@@ -9,5 +8,4 @@ namespace NSE.Core.Data
 
     }
 
-    public interface IAggregateRoot { }
 }
