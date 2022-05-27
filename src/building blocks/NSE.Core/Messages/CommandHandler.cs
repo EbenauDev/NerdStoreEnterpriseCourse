@@ -22,7 +22,7 @@ namespace NSE.Core.Messages
             ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
         }
 
-        protected async Task<ValidationResult> PersistirDados(IUnitOfWork uow)
+        protected async Task<ValidationResult> PersistirDadosAsync(IUnitOfWork uow)
         {
             if (await uow.CommitAsync() == false)
             {
