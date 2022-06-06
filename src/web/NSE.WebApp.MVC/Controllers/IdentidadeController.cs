@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSE.WebAPI.Core.Controllers;
 using NSE.WebApp.MVC.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Controllers
@@ -23,7 +20,6 @@ namespace NSE.WebApp.MVC.Controllers
         {
             return Ok();
         }
-
 
         [HttpGet]
         [Route("login")]
