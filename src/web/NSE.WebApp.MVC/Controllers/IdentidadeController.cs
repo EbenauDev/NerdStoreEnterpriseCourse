@@ -1,11 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSE.WebApp.MVC.Models;
+using NSE.WebApp.MVC.Services;
 using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Controllers
 {
     public class IdentidadeController : MainController
     {
+        private readonly IAutenticacaoService _autenticacaoService;
+
+        public IdentidadeController(IAutenticacaoService autenticacaoService)
+        {
+            _autenticacaoService = autenticacaoService;
+        }
+
         [HttpGet]
         [Route("nova-conta")]
         public IActionResult Registro()
@@ -19,6 +27,8 @@ namespace NSE.WebApp.MVC.Controllers
         {
             if (ModelState.IsValid == false)
                 return View(usuarioRegistro);
+
+            var resultado = await _autenticacaoService.RegistrarAsync(usuarioRegistro);
 
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
@@ -36,6 +46,8 @@ namespace NSE.WebApp.MVC.Controllers
         {
             if (ModelState.IsValid == false)
                 return View(usuarioLogin);
+
+            var resultado = await _autenticacaoService.LoginAsync(usuarioLogin);
 
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
