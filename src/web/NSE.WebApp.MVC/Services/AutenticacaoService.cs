@@ -18,24 +18,36 @@ namespace NSE.WebApp.MVC.Services
             _httpClient = httpClient;
         }
 
-        public async Task<string> LoginAsync(UsuarioLogin usuarioLogin)
+        public async Task<UsuarioRespostaLogin> LoginAsync(UsuarioLogin usuarioLogin)
         {
             var loginContent = new StringContent(content: JsonSerializer.Serialize(usuarioLogin),
                                                  encoding: Encoding.UTF8,
                                                  mediaType: "application/json");
 
             var response = await _httpClient.PostAsync(requestUri: "", loginContent);
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
         }
 
-        public async Task<string> RegistrarAsync(UsuarioRegistro usuarioRegistro)
+        public async Task<UsuarioRespostaLogin> RegistrarAsync(UsuarioRegistro usuarioRegistro)
         {
             var registroContent = new StringContent(content: JsonSerializer.Serialize(usuarioRegistro),
                                       encoding: Encoding.UTF8,
                                       mediaType: "application/json");
 
             var response = await _httpClient.PostAsync(requestUri: "", registroContent);
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
         }
     }
 }
