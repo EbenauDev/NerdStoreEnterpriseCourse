@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NSE.WebAPI.Core.Controllers;
 using NSE.WebApp.MVC.Models;
 using System.Threading.Tasks;
 
@@ -18,12 +17,15 @@ namespace NSE.WebApp.MVC.Controllers
         [Route("nova-conta")]
         public async Task<IActionResult> Registro(UsuarioRegistro usuarioRegistro)
         {
-            return Ok();
+            if (ModelState.IsValid == false)
+                return View(usuarioRegistro);
+
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         [HttpGet]
         [Route("login")]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -32,14 +34,17 @@ namespace NSE.WebApp.MVC.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
         {
-            return Ok();
+            if (ModelState.IsValid == false)
+                return View(usuarioLogin);
+
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
         [HttpGet]
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
-            return Ok();
+            return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
     }
 }

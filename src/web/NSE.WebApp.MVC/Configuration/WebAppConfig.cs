@@ -25,14 +25,21 @@ namespace NSE.WebApp.MVC.Configuration
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseAuthenticationConfiguration();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //});
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Identidade}/{action=Registro}/{id?}");
             });
         }
     }
