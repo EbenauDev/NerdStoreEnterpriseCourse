@@ -3,6 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+		<UserSecretsId>ec57d70c-3ba4-4791-890f-051c4dd80f5d</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,5 +13,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\building blocks\NSE.Core\NSE.Core.csproj" />
+		<ProjectReference Include="..\..\building blocks\NSE.WebAPI.Core\NSE.WebAPI.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Services\Contextos\" />
 	</ItemGroup>
 </Project>

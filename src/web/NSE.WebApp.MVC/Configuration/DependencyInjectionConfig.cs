@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NSE.WebAPI.Core.Services;
 using NSE.WebApp.MVC.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace NSE.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            services.AddScoped<IContextoService, ContextoService>();
         }
     }
 }
