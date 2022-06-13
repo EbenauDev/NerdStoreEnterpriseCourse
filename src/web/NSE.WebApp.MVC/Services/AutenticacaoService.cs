@@ -12,7 +12,14 @@ using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
 {
-    public class AutenticacaoService : IAutenticacaoService
+
+    public interface IAutenticacaoService
+    {
+        Task<UsuarioRespostaLogin> LoginAsync(UsuarioLogin usuarioLogin);
+        Task<UsuarioRespostaLogin> RegistrarAsync(UsuarioRegistro usuarioRegistro);
+    }
+
+    public class AutenticacaoService : ResponseHandlerService, IAutenticacaoService
     {
         private readonly HttpClient _httpClient;
         private readonly string _endereco;
@@ -29,12 +36,20 @@ namespace NSE.WebApp.MVC.Services
                                                  encoding: Encoding.UTF8,
                                                  mediaType: "application/json");
 
-            var response = await _httpClient.PostAsync(requestUri: _endereco, loginContent);
+            var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/autenticar", loginContent);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
+
+            if (DeveTratarErrosResponse(response))
+            {
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+            }
 
             return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
         }
@@ -45,12 +60,20 @@ namespace NSE.WebApp.MVC.Services
                                       encoding: Encoding.UTF8,
                                       mediaType: "application/json");
 
-            var response = await _httpClient.PostAsync(requestUri: _endereco, registroContent);
+            var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/nova-conta", registroContent);
 
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
             };
+
+            if (DeveTratarErrosResponse(response))
+            {
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+            }
 
             return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
         }

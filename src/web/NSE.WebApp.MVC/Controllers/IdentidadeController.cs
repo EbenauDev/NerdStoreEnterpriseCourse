@@ -34,8 +34,14 @@ namespace NSE.WebApp.MVC.Controllers
             if (ModelState.IsValid == false)
                 return View(usuarioRegistro);
 
-            var resultado = await _autenticacaoService.RegistrarAsync(usuarioRegistro);
-            await RealizarLoginAsync(resultado);
+            var resposta = await _autenticacaoService.RegistrarAsync(usuarioRegistro);
+
+            if (ResponsePossuiErros(resposta.ResponseResult))
+            {
+                return View(resposta);
+            }
+
+            await RealizarLoginAsync(resposta);
 
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
@@ -54,8 +60,14 @@ namespace NSE.WebApp.MVC.Controllers
             if (ModelState.IsValid == false)
                 return View(usuarioLogin);
 
-            var resultado = await _autenticacaoService.LoginAsync(usuarioLogin);
-            await RealizarLoginAsync(resultado);
+            var resposta = await _autenticacaoService.LoginAsync(usuarioLogin);
+
+            if (ResponsePossuiErros(resposta.ResponseResult))
+            {
+                return View(resposta);
+            }
+
+            await RealizarLoginAsync(resposta);
 
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
