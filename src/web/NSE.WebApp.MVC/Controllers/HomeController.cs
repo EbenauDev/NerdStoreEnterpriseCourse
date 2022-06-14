@@ -5,6 +5,13 @@ namespace NSE.WebApp.MVC.Controllers
 {
     public class HomeController : MainController
     {
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
         [Route("sistema-indisponivel")]
         public IActionResult SistemaIndisponivel()
         {

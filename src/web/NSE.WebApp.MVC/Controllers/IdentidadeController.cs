@@ -38,7 +38,7 @@ namespace NSE.WebApp.MVC.Controllers
 
             if (ResponsePossuiErros(resposta.ResponseResult))
             {
-                return View(resposta);
+                return View(usuarioRegistro);
             }
 
             await RealizarLoginAsync(resposta);
@@ -64,7 +64,7 @@ namespace NSE.WebApp.MVC.Controllers
 
             if (ResponsePossuiErros(resposta.ResponseResult))
             {
-                return View(resposta);
+                return View(usuarioLogin);
             }
 
             await RealizarLoginAsync(resposta);
@@ -76,6 +76,7 @@ namespace NSE.WebApp.MVC.Controllers
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(actionName: "Index", controllerName: "Home");
         }
 
