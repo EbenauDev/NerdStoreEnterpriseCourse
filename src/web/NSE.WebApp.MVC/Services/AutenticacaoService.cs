@@ -19,7 +19,7 @@ namespace NSE.WebApp.MVC.Services
         Task<UsuarioRespostaLogin> RegistrarAsync(UsuarioRegistro usuarioRegistro);
     }
 
-    public class AutenticacaoService : ResponseHandlerService, IAutenticacaoService
+    public class AutenticacaoService : Service, IAutenticacaoService
     {
         private readonly HttpClient _httpClient;
         private readonly string _endereco;
@@ -32,50 +32,34 @@ namespace NSE.WebApp.MVC.Services
 
         public async Task<UsuarioRespostaLogin> LoginAsync(UsuarioLogin usuarioLogin)
         {
-            var loginContent = new StringContent(content: JsonSerializer.Serialize(usuarioLogin),
-                                                 encoding: Encoding.UTF8,
-                                                 mediaType: "application/json");
-
+            var loginContent = ObterConteudo(usuarioLogin);
             var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/autenticar", loginContent);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
 
             if (DeveTratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
 
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
+            return await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
         }
 
         public async Task<UsuarioRespostaLogin> RegistrarAsync(UsuarioRegistro usuarioRegistro)
         {
-            var registroContent = new StringContent(content: JsonSerializer.Serialize(usuarioRegistro),
-                                      encoding: Encoding.UTF8,
-                                      mediaType: "application/json");
-
+            var registroContent = ObterConteudo(usuarioRegistro);
             var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/nova-conta", registroContent);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
 
             if (DeveTratarErrosResponse(response))
             {
                 return new UsuarioRespostaLogin
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializarObjetoResponse<ResponseResult>(response)
                 };
             }
 
-            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
+            return await DeserializarObjetoResponse<UsuarioRespostaLogin>(response);
         }
     }
 }
