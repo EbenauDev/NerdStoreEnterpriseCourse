@@ -22,18 +22,18 @@ namespace NSE.WebApp.MVC.Services
     public class AutenticacaoService : Service, IAutenticacaoService
     {
         private readonly HttpClient _httpClient;
-        private readonly string _endereco;
 
         public AutenticacaoService(HttpClient httpClient, IContextoService contextoService)
         {
+            httpClient.BaseAddress = new Uri(contextoService.GetContexto("Identidade")?.Endereco);
+
             _httpClient = httpClient;
-            _endereco = contextoService.GetContexto("Identidade")?.Endereco;
         }
 
         public async Task<UsuarioRespostaLogin> LoginAsync(UsuarioLogin usuarioLogin)
         {
             var loginContent = ObterConteudo(usuarioLogin);
-            var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync(requestUri: $"/api/identidade/autenticar", loginContent);
 
             if (DeveTratarErrosResponse(response))
             {
@@ -49,7 +49,7 @@ namespace NSE.WebApp.MVC.Services
         public async Task<UsuarioRespostaLogin> RegistrarAsync(UsuarioRegistro usuarioRegistro)
         {
             var registroContent = ObterConteudo(usuarioRegistro);
-            var response = await _httpClient.PostAsync(requestUri: $"{_endereco}/api/identidade/nova-conta", registroContent);
+            var response = await _httpClient.PostAsync(requestUri: $"/api/identidade/nova-conta", registroContent);
 
             if (DeveTratarErrosResponse(response))
             {
